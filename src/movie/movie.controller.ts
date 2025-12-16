@@ -7,49 +7,47 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { Movie } from '@root/generated/prisma/client';
 import { MovieService } from '@root/movie/movie.service';
-import { MovieEntity } from '@root/movie/entities/movie.entity';
-import { ApiOkResponse, ApiParam } from '@nestjs/swagger';
 import { MovieDto } from '@root/movie/dto/movie.dto';
+import { ApiOkResponse, ApiParam } from '@nestjs/swagger';
 
 @Controller('movies')
 export class MovieController {
   constructor(private readonly movieService: MovieService) {}
 
   @Get('all')
-  findAll(): Promise<MovieEntity[]> {
+  findAll(): Promise<Partial<Movie>[]> {
     return this.movieService.findAll();
   }
 
   @Get(':id')
   @ApiParam({ name: 'id', type: String })
-  findOne(@Param('id') id: string): Promise<MovieEntity> {
-    return this.movieService.findOne(id);
+  findById(@Param('id') id: string): Promise<Movie> {
+    return this.movieService.findById(id);
   }
 
   @Post()
-  createMovie(@Body() dto: MovieDto): Promise<MovieEntity> {
-    return this.movieService.createMovie(dto);
+  create(@Body() dto: MovieDto): Promise<Movie> {
+    return this.movieService.create(dto);
   }
 
   @Put(':id')
   @ApiParam({ name: 'id', type: String })
-  updateMovie(
-    @Param('id') id: string,
-    @Body() dto: MovieDto,
-  ): Promise<MovieEntity> {
-    return this.movieService.updateMovie(id, dto);
+  update(@Param('id') id: string, @Body() dto: MovieDto): Promise<Movie> {
+    return this.movieService.update(id, dto);
   }
 
   @Delete(':id')
   @ApiParam({ name: 'id', type: String })
   @ApiOkResponse({
     description: 'Deleted movie id',
-    schema: { example: 3 },
+    schema: { example: '17554dd8-96e6-4846-a715-c7f055ec32fe' },
   })
   deleteMovie(@Param('id') id: string): Promise<string> {
-    return this.movieService.deleteMovie(id);
+    return this.movieService.delete(id);
   }
+
   // @Get('genre')
   // findByGenre(@Query() dto: MovieDto) {
   //   return { ...dto };
