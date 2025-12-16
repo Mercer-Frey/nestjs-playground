@@ -16,6 +16,7 @@ import { PatchTaskDto } from '@root/task/dto/patch-task.dto';
 import { StringToLowerCasePipe } from '@root/common/pipes/string-to-lower-case.pipe';
 import { AuthGuard } from '@root/common/guards/auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { UserAgent } from '@root/common/decorators/user-agent.decorator';
 
 @Controller('task')
 export class TaskController {
@@ -53,9 +54,10 @@ export class TaskController {
   @ApiBearerAuth('access-token')
   @UseGuards(AuthGuard)
   @Get('me/me')
-  profile() {
+  profile(@UserAgent() userAgent: string) {
     return {
       id: 100,
+      userAgent,
     };
   }
 }
