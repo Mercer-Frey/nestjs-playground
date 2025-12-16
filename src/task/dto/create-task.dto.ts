@@ -17,7 +17,7 @@ enum ETaskTag {
   HOME = 'home',
 }
 export class CreateTaskDto {
-  @ApiProperty({ example: 'My task title' })
+  @ApiProperty({ example: 'Task: My task title' })
   @IsString()
   @IsNotEmpty()
   @StartsWith('Task:')
@@ -31,13 +31,13 @@ export class CreateTaskDto {
   @IsOptional()
   description: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 1 })
   @IsInt()
   @IsPositive()
   @IsOptional()
   priority: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: [ETaskTag.HOME] })
   @IsArray()
   @IsEnum(ETaskTag, { each: true })
   @IsOptional()

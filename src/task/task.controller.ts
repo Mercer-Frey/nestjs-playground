@@ -12,6 +12,7 @@ import { TaskService } from '@root/task/task.service';
 import { CreateTaskDto } from '@root/task/dto/create-task.dto';
 import { UpdateTaskDto } from '@root/task/dto/update-task.dto';
 import { PatchTaskDto } from '@root/task/dto/patch-task.dto';
+import { StringToLowerCasePipe } from '@root/common/pipes/string-to-lower-case.pipe';
 
 @Controller('task')
 export class TaskController {
@@ -26,7 +27,11 @@ export class TaskController {
     return this.taskService.findById(Number(id));
   }
   @Post()
-  create(@Body() dto: CreateTaskDto) {
+  create(
+    @Body('title', StringToLowerCasePipe) title: string,
+    @Body() dto: CreateTaskDto,
+  ) {
+    dto.title = title;
     return this.taskService.create(dto);
   }
   @Put(':id')
