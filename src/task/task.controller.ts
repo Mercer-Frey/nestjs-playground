@@ -7,12 +7,15 @@ import {
   Patch,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { TaskService } from '@root/task/task.service';
 import { CreateTaskDto } from '@root/task/dto/create-task.dto';
 import { UpdateTaskDto } from '@root/task/dto/update-task.dto';
 import { PatchTaskDto } from '@root/task/dto/patch-task.dto';
 import { StringToLowerCasePipe } from '@root/common/pipes/string-to-lower-case.pipe';
+import { AuthGuard } from '@root/common/guards/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('task')
 export class TaskController {
@@ -45,5 +48,14 @@ export class TaskController {
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.taskService.delete(Number(id));
+  }
+
+  @ApiBearerAuth('access-token')
+  @UseGuards(AuthGuard)
+  @Get('me/me')
+  profile() {
+    return {
+      id: 100,
+    };
   }
 }

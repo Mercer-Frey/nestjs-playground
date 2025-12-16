@@ -10,6 +10,7 @@ async function bootstrap() {
   app.use(LoggerMiddleware);
 
   app.useGlobalPipes(new ValidationPipe());
+  // app.useGlobalGuards(new AuthGuard());
 
   app.setGlobalPrefix('api');
   app.enableVersioning({
@@ -20,6 +21,15 @@ async function bootstrap() {
     .setTitle('Dunzo API')
     .setDescription('API documentation')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        in: 'header',
+      },
+      'access-token',
+    )
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);

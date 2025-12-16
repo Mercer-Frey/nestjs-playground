@@ -5,7 +5,7 @@ export function LoggerMiddleware(
   res: Response,
   next: NextFunction,
 ) {
-  console.log('LoggerMiddleware ', req.method);
+  // console.log('LoggerMiddleware ', req.method);
 
   next();
 }
