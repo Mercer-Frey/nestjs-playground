@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { LoggerMiddleware } from '@root/common/middlewares/logger.middleware';
+import { ResponseInterceptor } from '@root/common/interceptors/response.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +12,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
   // app.useGlobalGuards(new AuthGuard());
+  app.useGlobalInterceptors(new ResponseInterceptor());
 
   app.setGlobalPrefix('api');
   app.enableVersioning({
