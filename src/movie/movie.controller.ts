@@ -1,66 +1,100 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
-  Headers,
   Param,
   Post,
-  Query,
-  Req,
-  Res,
+  Put,
 } from '@nestjs/common';
+import { MovieService } from '@root/movie/movie.service';
+import { MovieEntity } from '@root/movie/entities/movie.entity';
+import { ApiOkResponse, ApiParam } from '@nestjs/swagger';
 import { MovieDto } from '@root/movie/dto/movie.dto';
-import { CreateMovieDto } from '@root/movie/dto/create-movie.dto';
-import { ApiHeader } from '@nestjs/swagger';
-import type { Request, Response } from 'express';
 
-@Controller('movie')
+@Controller('movies')
 export class MovieController {
-  @Get()
-  findByGenre(@Query() dto: MovieDto) {
-    return { ...dto };
+  constructor(private readonly movieService: MovieService) {}
+
+  @Get('all')
+  findAll(): Promise<MovieEntity[]> {
+    return this.movieService.findAll();
   }
 
   @Get(':id')
-  findById(@Param('id') id: string) {
-    return { id };
+  @ApiParam({ name: 'id', type: String })
+  findOne(@Param('id') id: string): Promise<MovieEntity> {
+    return this.movieService.findOne(id);
   }
 
   @Post()
-  create(@Body() dto: CreateMovieDto) {
-    return `${dto.title}`;
+  createMovie(@Body() dto: MovieDto): Promise<MovieEntity> {
+    return this.movieService.createMovie(dto);
   }
 
-  @Get('headers')
-  getHeaders(@Headers() headers: any) {
-    return JSON.stringify(headers);
+  @Put(':id')
+  @ApiParam({ name: 'id', type: String })
+  updateMovie(
+    @Param('id') id: string,
+    @Body() dto: MovieDto,
+  ): Promise<MovieEntity> {
+    return this.movieService.updateMovie(id, dto);
   }
 
-  @ApiHeader({
-    name: 'user-agent',
-    required: false,
+  @Delete(':id')
+  @ApiParam({ name: 'id', type: String })
+  @ApiOkResponse({
+    description: 'Deleted movie id',
+    schema: { example: 3 },
   })
-  @Get('user-agent')
-  getUserAgent(@Headers('user-agent') userAgent: string) {
-    return { userAgent };
+  deleteMovie(@Param('id') id: string): Promise<string> {
+    return this.movieService.deleteMovie(id);
   }
-
-  @Get('request')
-  getRequestDetails(@Req() req: Request) {
-    return {
-      method: req.method.toUpperCase(),
-      url: req.url,
-      params: req.params,
-      query: req.query,
-      headers: req.headers,
-    };
-  }
-
-  @Get('response')
-  getResponseDetails(@Res() res: Response) {
-    res.status(200).json({
-      statusCode: 200,
-      message: 'OK',
-    });
-  }
+  // @Get('genre')
+  // findByGenre(@Query() dto: MovieDto) {
+  //   return { ...dto };
+  // }
+  //
+  // @Get(':id')
+  // findById(@Param('id') id: string) {
+  //   return { id };
+  // }
+  //
+  // @Post()
+  // create(@Body() dto: CreateMovieDto) {
+  //   return `${dto.title}`;
+  // }
+  //
+  // @Get('headers')
+  // getHeaders(@Headers() headers: any) {
+  //   return JSON.stringify(headers);
+  // }
+  //
+  // @ApiHeader({
+  //   name: 'user-agent',
+  //   required: false,
+  // })
+  // @Get('user-agent')
+  // getUserAgent(@Headers('user-agent') userAgent: string) {
+  //   return { userAgent };
+  // }
+  //
+  // @Get('request')
+  // getRequestDetails(@Req() req: Request) {
+  //   return {
+  //     method: req.method.toUpperCase(),
+  //     url: req.url,
+  //     params: req.params,
+  //     query: req.query,
+  //     headers: req.headers,
+  //   };
+  // }
+  //
+  // @Get('response')
+  // getResponseDetails(@Res() res: Response) {
+  //   res.status(200).json({
+  //     statusCode: 200,
+  //     message: 'OK',
+  //   });
+  // }
 }
