@@ -1,10 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { LoggerMiddleware } from '@root/common/middlewares/logger.middleware';
 import { ResponseInterceptor } from '@root/common/interceptors/response.interceptor';
 import { AllExceptionFilter } from '@root/common/filters/all-exception.filter';
+import { AuthGuard } from '@root/common/guards/auth.guard';
+import { SwaggerConfig } from '@root/config/swagger.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,7 +13,7 @@ async function bootstrap() {
   app.use(LoggerMiddleware);
 
   app.useGlobalPipes(new ValidationPipe());
-  // app.useGlobalGuards(new AuthGuard());
+  app.useGlobalGuards(new AuthGuard());
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new AllExceptionFilter());
 
@@ -21,23 +22,8 @@ async function bootstrap() {
     type: VersioningType.URI,
     defaultVersion: '1',
   });
-  const config = new DocumentBuilder()
-    .setTitle('Dunzo API')
-    .setDescription('API documentation')
-    .setVersion('1.0')
-    .addBearerAuth(
-      {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        in: 'header',
-      },
-      'access-token',
-    )
-    .build();
-  const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, documentFactory);
 
+  SwaggerConfig(app);
   await app.listen(process.env.PORT ?? 3000);
 }
 // eslint-disable-next-line

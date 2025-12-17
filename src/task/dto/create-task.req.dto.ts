@@ -11,13 +11,17 @@ import {
 } from 'class-validator';
 import { StartsWith } from '@shared/decorators/starts-with.decorator';
 
-enum ETaskTag {
+export enum ETaskTag {
   WORK = 'work',
   STUDY = 'study',
   HOME = 'home',
 }
-export class CreateTaskDto {
-  @ApiProperty({ example: 'Task: My task title' })
+export class CreateTaskReqDto {
+  @ApiProperty({
+    example: 'Task: My task title',
+    description: 'My task description',
+    type: 'string',
+  })
   @IsString()
   @IsNotEmpty()
   @StartsWith('Task:')
@@ -37,11 +41,14 @@ export class CreateTaskDto {
   @IsOptional()
   priority: number;
 
-  @ApiProperty({ example: [ETaskTag.HOME] })
+  @ApiProperty({
+    enum: ETaskTag,
+    example: ETaskTag.HOME,
+  })
   @IsArray()
   @IsEnum(ETaskTag, { each: true })
   @IsOptional()
-  tags: string[];
+  tags: ETaskTag[];
   //
   // @ApiProperty()
   // @IsString()

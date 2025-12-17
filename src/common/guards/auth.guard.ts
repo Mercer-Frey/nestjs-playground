@@ -9,10 +9,10 @@ import { Request } from 'express';
 @Injectable()
 export class AuthGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
-    const request = context.switchToHttp().getRequest() as Request;
+    const request: Request = context.switchToHttp().getRequest();
     const token = request.headers.authorization;
 
-    // console.log('Guard', request.headers);
+    console.log('AUTH HEADER:', request.headers.authorization);
 
     if (!token || !token.startsWith('Bearer ')) {
       throw new UnauthorizedException('Authentication failed');
