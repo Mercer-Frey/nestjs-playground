@@ -5,7 +5,10 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { PrismaService } from '@root/prisma/prisma.service';
-import { RegisterRequestDto } from '@root/auth/dto/register.dto';
+import {
+  RegisterRequestDto,
+  RegisterResponseDto,
+} from '@root/auth/dto/register.dto';
 import { hash, verify } from 'argon2';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
@@ -41,7 +44,7 @@ export class AuthService {
   async register(
     res: Response,
     dto: RegisterRequestDto,
-  ): Promise<LoginResponseDto> {
+  ): Promise<RegisterResponseDto> {
     const { email, password, name } = dto;
 
     const existedUser = await this.prismaService.user.findUnique({

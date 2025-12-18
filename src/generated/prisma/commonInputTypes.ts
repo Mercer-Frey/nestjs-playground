@@ -194,6 +194,33 @@ export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>;
 };
 
+export type EnumUserRoleQlFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserRoleQl | Prisma.EnumUserRoleQlFieldRefInput<$PrismaModel>;
+  in?:
+    | $Enums.UserRoleQl[]
+    | Prisma.ListEnumUserRoleQlFieldRefInput<$PrismaModel>;
+  notIn?:
+    | $Enums.UserRoleQl[]
+    | Prisma.ListEnumUserRoleQlFieldRefInput<$PrismaModel>;
+  not?: Prisma.NestedEnumUserRoleQlFilter<$PrismaModel> | $Enums.UserRoleQl;
+};
+
+export type EnumUserRoleQlWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserRoleQl | Prisma.EnumUserRoleQlFieldRefInput<$PrismaModel>;
+  in?:
+    | $Enums.UserRoleQl[]
+    | Prisma.ListEnumUserRoleQlFieldRefInput<$PrismaModel>;
+  notIn?:
+    | $Enums.UserRoleQl[]
+    | Prisma.ListEnumUserRoleQlFieldRefInput<$PrismaModel>;
+  not?:
+    | Prisma.NestedEnumUserRoleQlWithAggregatesFilter<$PrismaModel>
+    | $Enums.UserRoleQl;
+  _count?: Prisma.NestedIntFilter<$PrismaModel>;
+  _min?: Prisma.NestedEnumUserRoleQlFilter<$PrismaModel>;
+  _max?: Prisma.NestedEnumUserRoleQlFilter<$PrismaModel>;
+};
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>;
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>;
@@ -377,4 +404,31 @@ export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>;
   _min?: Prisma.NestedDateTimeFilter<$PrismaModel>;
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>;
+};
+
+export type NestedEnumUserRoleQlFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserRoleQl | Prisma.EnumUserRoleQlFieldRefInput<$PrismaModel>;
+  in?:
+    | $Enums.UserRoleQl[]
+    | Prisma.ListEnumUserRoleQlFieldRefInput<$PrismaModel>;
+  notIn?:
+    | $Enums.UserRoleQl[]
+    | Prisma.ListEnumUserRoleQlFieldRefInput<$PrismaModel>;
+  not?: Prisma.NestedEnumUserRoleQlFilter<$PrismaModel> | $Enums.UserRoleQl;
+};
+
+export type NestedEnumUserRoleQlWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserRoleQl | Prisma.EnumUserRoleQlFieldRefInput<$PrismaModel>;
+  in?:
+    | $Enums.UserRoleQl[]
+    | Prisma.ListEnumUserRoleQlFieldRefInput<$PrismaModel>;
+  notIn?:
+    | $Enums.UserRoleQl[]
+    | Prisma.ListEnumUserRoleQlFieldRefInput<$PrismaModel>;
+  not?:
+    | Prisma.NestedEnumUserRoleQlWithAggregatesFilter<$PrismaModel>
+    | $Enums.UserRoleQl;
+  _count?: Prisma.NestedIntFilter<$PrismaModel>;
+  _min?: Prisma.NestedEnumUserRoleQlFilter<$PrismaModel>;
+  _max?: Prisma.NestedEnumUserRoleQlFilter<$PrismaModel>;
 };

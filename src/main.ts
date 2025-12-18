@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
-import { AllExceptionFilter } from '@root/common/filters/all-exception.filter';
 import { SwaggerConfig } from '@root/config/swagger.config';
 import cookieParser from 'cookie-parser';
 
@@ -19,7 +18,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   // app.useGlobalGuards(new AuthGuard());
   // app.useGlobalInterceptors(new ResponseInterceptor());
-  app.useGlobalFilters(new AllExceptionFilter());
+  // app.useGlobalFilters(new AllExceptionFilter());
 
   app.setGlobalPrefix('api');
   app.enableVersioning({

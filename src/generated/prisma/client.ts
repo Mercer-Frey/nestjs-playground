@@ -63,3 +63,8 @@ export type Poster = Prisma.PosterModel;
  *
  */
 export type User = Prisma.UserModel;
+/**
+ * Model UserQl
+ *
+ */
+export type UserQl = Prisma.UserQlModel;

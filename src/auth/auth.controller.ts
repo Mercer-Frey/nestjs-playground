@@ -58,7 +58,7 @@ export class AuthController {
   async register(
     @Res({ passthrough: true }) res: Response,
     @Body() dto: RegisterRequestDto,
-  ): Promise<LoginResponseDto> {
+  ): Promise<RegisterResponseDto> {
     return this.authService.register(res, dto);
   }
 

@@ -16,3 +16,10 @@ export const Genre = {
 } as const;
 
 export type Genre = (typeof Genre)[keyof typeof Genre];
+
+export const UserRoleQl = {
+  GUEST: 'GUEST',
+  ADMIN: 'ADMIN',
+} as const;
+
+export type UserRoleQl = (typeof UserRoleQl)[keyof typeof UserRoleQl];

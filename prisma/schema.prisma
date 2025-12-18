@@ -92,3 +92,24 @@ model User {
 
   @@map("users")
 }
+
+model UserQl {
+  id String @id @default(uuid(4))
+
+  email    String     @unique
+  password String
+  name     String
+  role     UserRoleQl @default(GUEST)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt() @map("updated_at")
+
+  @@map("users_ql")
+}
+
+enum UserRoleQl {
+  GUEST
+  ADMIN
+
+  @@map("enum_user_roles")
+}
