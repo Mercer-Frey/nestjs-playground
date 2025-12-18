@@ -1,0 +1,54 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthQlModel {
+  accessToken: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input LoginRequestInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  login(data: LoginRequestInput!): AuthQlModel!
+  logout: Boolean!
+  refresh: AuthQlModel!
+  register(data: RegisterRequestInput!): AuthQlModel!
+}
+
+type Query {
+  """description getUsers"""
+  getAllUsers: [UserQlModel!]!
+  profile: UserQlModel!
+}
+
+input RegisterRequestInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+"""User role description"""
+type UserQlModel {
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+
+  """Id of the user id for this user"""
+  name: String!
+  password: String!
+  role: UserRoleQl!
+  updatedAt: DateTime!
+}
+
+enum UserRoleQl {
+  ADMIN
+  GUEST
+}
