@@ -37,3 +37,8 @@ export type Actor = Prisma.ActorModel;
  *
  */
 export type Poster = Prisma.PosterModel;
+/**
+ * Model User
+ *
+ */
+export type User = Prisma.UserModel;

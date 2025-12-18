@@ -6,6 +6,7 @@ import { ReviewModule } from './review/review.module';
 import { ActorModule } from './actor/actor.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { LoggingMiddleware } from '@root/common/middlewares/logging.middleware';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { LoggingMiddleware } from '@root/common/middlewares/logging.middleware';
     MovieModule,
     ReviewModule,
     ActorModule,
+    AuthModule,
   ],
 })
 export class AppModule implements NestModule {

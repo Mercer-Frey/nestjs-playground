@@ -58,6 +58,7 @@ export const ModelName = {
   Review: 'Review',
   Actor: 'Actor',
   Poster: 'Poster',
+  User: 'User',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -123,6 +124,18 @@ export const PosterScalarFieldEnum = {
 
 export type PosterScalarFieldEnum =
   (typeof PosterScalarFieldEnum)[keyof typeof PosterScalarFieldEnum];
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type UserScalarFieldEnum =
+  (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 
 export const SortOrder = {
   asc: 'asc',

@@ -1,20 +1,24 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
-import { LoggerMiddleware } from '@root/common/middlewares/logger.middleware';
-import { ResponseInterceptor } from '@root/common/interceptors/response.interceptor';
 import { AllExceptionFilter } from '@root/common/filters/all-exception.filter';
-import { AuthGuard } from '@root/common/guards/auth.guard';
 import { SwaggerConfig } from '@root/config/swagger.config';
+import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.use(cookieParser());
 
-  app.use(LoggerMiddleware);
+  app.enableCors({
+    credentials: true,
+    origin: 'http://localhost:4200',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  });
+  // app.use(LoggerMiddleware);
 
   app.useGlobalPipes(new ValidationPipe());
-  app.useGlobalGuards(new AuthGuard());
-  app.useGlobalInterceptors(new ResponseInterceptor());
+  // app.useGlobalGuards(new AuthGuard());
+  // app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new AllExceptionFilter());
 
   app.setGlobalPrefix('api');
