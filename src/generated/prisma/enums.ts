@@ -23,3 +23,10 @@ export const UserRoleQl = {
 } as const;
 
 export type UserRoleQl = (typeof UserRoleQl)[keyof typeof UserRoleQl];
+
+export const ArtistGenre = {
+  ROCK: 'ROCK',
+  POP: 'POP',
+} as const;
+
+export type ArtistGenre = (typeof ArtistGenre)[keyof typeof ArtistGenre];

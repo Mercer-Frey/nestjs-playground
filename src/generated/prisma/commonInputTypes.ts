@@ -221,6 +221,37 @@ export type EnumUserRoleQlWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumUserRoleQlFilter<$PrismaModel>;
 };
 
+export type EnumArtistGenreFilter<$PrismaModel = never> = {
+  equals?:
+    | $Enums.ArtistGenre
+    | Prisma.EnumArtistGenreFieldRefInput<$PrismaModel>;
+  in?:
+    | $Enums.ArtistGenre[]
+    | Prisma.ListEnumArtistGenreFieldRefInput<$PrismaModel>;
+  notIn?:
+    | $Enums.ArtistGenre[]
+    | Prisma.ListEnumArtistGenreFieldRefInput<$PrismaModel>;
+  not?: Prisma.NestedEnumArtistGenreFilter<$PrismaModel> | $Enums.ArtistGenre;
+};
+
+export type EnumArtistGenreWithAggregatesFilter<$PrismaModel = never> = {
+  equals?:
+    | $Enums.ArtistGenre
+    | Prisma.EnumArtistGenreFieldRefInput<$PrismaModel>;
+  in?:
+    | $Enums.ArtistGenre[]
+    | Prisma.ListEnumArtistGenreFieldRefInput<$PrismaModel>;
+  notIn?:
+    | $Enums.ArtistGenre[]
+    | Prisma.ListEnumArtistGenreFieldRefInput<$PrismaModel>;
+  not?:
+    | Prisma.NestedEnumArtistGenreWithAggregatesFilter<$PrismaModel>
+    | $Enums.ArtistGenre;
+  _count?: Prisma.NestedIntFilter<$PrismaModel>;
+  _min?: Prisma.NestedEnumArtistGenreFilter<$PrismaModel>;
+  _max?: Prisma.NestedEnumArtistGenreFilter<$PrismaModel>;
+};
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>;
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>;
@@ -431,4 +462,35 @@ export type NestedEnumUserRoleQlWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>;
   _min?: Prisma.NestedEnumUserRoleQlFilter<$PrismaModel>;
   _max?: Prisma.NestedEnumUserRoleQlFilter<$PrismaModel>;
+};
+
+export type NestedEnumArtistGenreFilter<$PrismaModel = never> = {
+  equals?:
+    | $Enums.ArtistGenre
+    | Prisma.EnumArtistGenreFieldRefInput<$PrismaModel>;
+  in?:
+    | $Enums.ArtistGenre[]
+    | Prisma.ListEnumArtistGenreFieldRefInput<$PrismaModel>;
+  notIn?:
+    | $Enums.ArtistGenre[]
+    | Prisma.ListEnumArtistGenreFieldRefInput<$PrismaModel>;
+  not?: Prisma.NestedEnumArtistGenreFilter<$PrismaModel> | $Enums.ArtistGenre;
+};
+
+export type NestedEnumArtistGenreWithAggregatesFilter<$PrismaModel = never> = {
+  equals?:
+    | $Enums.ArtistGenre
+    | Prisma.EnumArtistGenreFieldRefInput<$PrismaModel>;
+  in?:
+    | $Enums.ArtistGenre[]
+    | Prisma.ListEnumArtistGenreFieldRefInput<$PrismaModel>;
+  notIn?:
+    | $Enums.ArtistGenre[]
+    | Prisma.ListEnumArtistGenreFieldRefInput<$PrismaModel>;
+  not?:
+    | Prisma.NestedEnumArtistGenreWithAggregatesFilter<$PrismaModel>
+    | $Enums.ArtistGenre;
+  _count?: Prisma.NestedIntFilter<$PrismaModel>;
+  _min?: Prisma.NestedEnumArtistGenreFilter<$PrismaModel>;
+  _max?: Prisma.NestedEnumArtistGenreFilter<$PrismaModel>;
 };

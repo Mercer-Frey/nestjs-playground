@@ -13,6 +13,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AuthQlModule } from './auth-ql/auth-ql.module';
 import { UserQlModule } from './user-ql/user-ql.module';
 import { ChatModule } from './chat/chat.module';
+import { ArtistModule } from './artist/artist.module';
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { ChatModule } from './chat/chat.module';
     AuthQlModule,
     UserQlModule,
     ChatModule,
+    ArtistModule,
   ],
 })
 export class AppModule implements NestModule {

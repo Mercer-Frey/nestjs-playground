@@ -61,6 +61,7 @@ export const ModelName = {
   User: 'User',
   UserQl: 'UserQl',
   Message: 'Message',
+  Artist: 'Artist',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -161,6 +162,17 @@ export const MessageScalarFieldEnum = {
 
 export type MessageScalarFieldEnum =
   (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum];
+
+export const ArtistScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  genre: 'genre',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type ArtistScalarFieldEnum =
+  (typeof ArtistScalarFieldEnum)[keyof typeof ArtistScalarFieldEnum];
 
 export const SortOrder = {
   asc: 'asc',

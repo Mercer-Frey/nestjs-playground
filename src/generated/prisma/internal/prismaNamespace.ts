@@ -419,6 +419,7 @@ export const ModelName = {
   User: 'User',
   UserQl: 'UserQl',
   Message: 'Message',
+  Artist: 'Artist',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -447,7 +448,8 @@ export type TypeMap<
       | 'poster'
       | 'user'
       | 'userQl'
-      | 'message';
+      | 'message'
+      | 'artist';
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
@@ -983,6 +985,82 @@ export type TypeMap<
         };
       };
     };
+    Artist: {
+      payload: Prisma.$ArtistPayload<ExtArgs>;
+      fields: Prisma.ArtistFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.ArtistFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.ArtistFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>;
+        };
+        findFirst: {
+          args: Prisma.ArtistFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.ArtistFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>;
+        };
+        findMany: {
+          args: Prisma.ArtistFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>[];
+        };
+        create: {
+          args: Prisma.ArtistCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>;
+        };
+        createMany: {
+          args: Prisma.ArtistCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.ArtistCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>[];
+        };
+        delete: {
+          args: Prisma.ArtistDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>;
+        };
+        update: {
+          args: Prisma.ArtistUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>;
+        };
+        deleteMany: {
+          args: Prisma.ArtistDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.ArtistUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.ArtistUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>[];
+        };
+        upsert: {
+          args: Prisma.ArtistUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArtistPayload>;
+        };
+        aggregate: {
+          args: Prisma.ArtistAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateArtist>;
+        };
+        groupBy: {
+          args: Prisma.ArtistGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.ArtistGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.ArtistCountArgs<ExtArgs>;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.ArtistCountAggregateOutputType>
+            | number;
+        };
+      };
+    };
   };
 } & {
   other: {
@@ -1105,6 +1183,17 @@ export const MessageScalarFieldEnum = {
 export type MessageScalarFieldEnum =
   (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum];
 
+export const ArtistScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  genre: 'genre',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const;
+
+export type ArtistScalarFieldEnum =
+  (typeof ArtistScalarFieldEnum)[keyof typeof ArtistScalarFieldEnum];
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc',
@@ -1125,6 +1214,7 @@ export const NullsOrder = {
 } as const;
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];
+
 
 /**
  * Field references
@@ -1232,6 +1322,22 @@ export type EnumUserRoleQlFieldRefInput<$PrismaModel> = FieldRefInputType<
 export type ListEnumUserRoleQlFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
   'UserRoleQl[]'
+>;
+
+/**
+ * Reference to a field of type 'ArtistGenre'
+ */
+export type EnumArtistGenreFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'ArtistGenre'
+>;
+
+/**
+ * Reference to a field of type 'ArtistGenre[]'
+ */
+export type ListEnumArtistGenreFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'ArtistGenre[]'
 >;
 
 /**
@@ -1344,6 +1450,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit;
   userQl?: Prisma.UserQlOmit;
   message?: Prisma.MessageOmit;
+  artist?: Prisma.ArtistOmit;
 };
 
 /* Types for Logging */
