@@ -68,3 +68,8 @@ export type User = Prisma.UserModel;
  *
  */
 export type UserQl = Prisma.UserQlModel;
+/**
+ * Model Message
+ *
+ */
+export type Message = Prisma.MessageModel;

@@ -113,3 +113,14 @@ enum UserRoleQl {
 
   @@map("enum_user_roles")
 }
+
+model Message {
+  id String @id @default(uuid(4))
+
+  text String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt() @map("updated_at")
+
+  @@map("messages")
+}

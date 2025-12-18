@@ -12,6 +12,7 @@ import { getGraphQLConfig } from '@root/config/graphql.config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AuthQlModule } from './auth-ql/auth-ql.module';
 import { UserQlModule } from './user-ql/user-ql.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { UserQlModule } from './user-ql/user-ql.module';
     AuthModule,
     AuthQlModule,
     UserQlModule,
+    ChatModule,
   ],
 })
 export class AppModule implements NestModule {
