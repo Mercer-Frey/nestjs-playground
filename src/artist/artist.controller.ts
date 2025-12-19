@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ArtistService } from './artist.service';
 import { ArtistDto } from '@root/artist/dto/create-artist.dto';
 
-@Controller('artists')
+@Controller({ path: 'artists', version: '2' })
 export class ArtistController {
   constructor(private readonly artistService: ArtistService) {}
 

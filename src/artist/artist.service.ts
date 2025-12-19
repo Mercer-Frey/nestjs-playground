@@ -3,7 +3,7 @@ import { ArtistDto } from './dto/create-artist.dto';
 import { PrismaService } from '@root/prisma/prisma.service';
 import { Artist } from '@root/generated/prisma/client';
 
-@Injectable({ version: 2 })
+@Injectable()
 export class ArtistService {
   constructor(private readonly prismaService: PrismaService) {}
 
