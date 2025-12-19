@@ -1,18 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 import { SwaggerConfig } from '@root/config/swagger.config';
 import cookieParser from 'cookie-parser';
 import { ConfigService } from '@nestjs/config';
-import { CustomLogger } from '@root/common/logger/logger.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
-    bufferLogs: true,
-  });
+  const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService);
   app.use(cookieParser());
-
+  app.useGlobalPipes(new ValidationPipe());
+  SwaggerConfig(app);
   app.enableCors({
     credentials: true,
     origin: config.getOrThrow<string>('ALLOWED_ORIGINS').split(','),
@@ -20,30 +18,6 @@ async function bootstrap() {
     exposeHeaders: ['Set-Cookie', 'HttpOnly'],
     allowedHeaders: ['Authorization', 'X-Requested-With'],
   });
-  // app.use(LoggerMiddleware);
-
-  app.useGlobalPipes(new ValidationPipe());
-  // app.useGlobalGuards(new AuthGuard());
-  // app.useGlobalInterceptors(new ResponseInterceptor());
-  // app.useGlobalFilters(new AllExceptionFilter());
-
-  app.setGlobalPrefix('api');
-  app.enableVersioning({
-    type: VersioningType.URI,
-    defaultVersion: '1',
-  });
-
-  SwaggerConfig(app);
-
-  // app.enableVersioning({
-  //   type: VersioningType.HEADER,
-  //   header: 'X-API-Version',
-  //   defaultVersion: '1',
-  // });
-
-  app.useLogger(new CustomLogger());
-
   await app.listen(process.env.PORT ?? 3000);
 }
-// eslint-disable-next-line
 bootstrap();

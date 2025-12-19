@@ -1,21 +1,23 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Res } from '@nestjs/common';
 import { AppService } from '@root/app.service';
+import type { Response } from 'express';
+import { ClientIp, UserAgent } from '@root/common/decorators/http.decorator';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  hello(): string {
-    return this.appService.hello();
-  }
+  @Get(':code')
+  async getLinkByShortCode(
+    @Param('code') code: string,
+    @Res({ passthrough: true }) res: Response,
+    @ClientIp() clientIp: string,
+    @UserAgent() userAgent: string,
+  ): Promise<void> {
+    const link = await this.appService.getLinkByShortCode(code);
 
-  @Get('spotify-artists/:id')
-  async getArtist(@Param('id') id: string) {
-    return this.appService.getArtist(id);
-  }
-  @Get('spotify-albums/:id')
-  async getAlbum(@Param('id') id: string) {
-    return this.appService.getAlbum(id);
+    await this.appService.trackClick(link.shortCode, clientIp, userAgent);
+
+    return res.redirect(link.originalUrl);
   }
 }

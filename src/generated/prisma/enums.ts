@@ -8,25 +8,5 @@
  * 🟢 You can import this file directly.
  */
 
-export const Genre = {
-  ACTION: 'ACTION',
-  DRAMA: 'DRAMA',
-  HORROR: 'HORROR',
-  COMEDY: 'COMEDY',
-} as const;
-
-export type Genre = (typeof Genre)[keyof typeof Genre];
-
-export const UserRoleQl = {
-  GUEST: 'GUEST',
-  ADMIN: 'ADMIN',
-} as const;
-
-export type UserRoleQl = (typeof UserRoleQl)[keyof typeof UserRoleQl];
-
-export const ArtistGenre = {
-  ROCK: 'ROCK',
-  POP: 'POP',
-} as const;
-
-export type ArtistGenre = (typeof ArtistGenre)[keyof typeof ArtistGenre];
+// This file is empty because there are no enums in the schema.
+export {};

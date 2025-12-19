@@ -54,14 +54,9 @@ export const JsonNull = runtime.JsonNull;
 export const AnyNull = runtime.AnyNull;
 
 export const ModelName = {
-  Movie: 'Movie',
-  Review: 'Review',
-  Actor: 'Actor',
-  Poster: 'Poster',
   User: 'User',
-  UserQl: 'UserQl',
-  Message: 'Message',
-  Artist: 'Artist',
+  Link: 'Link',
+  Click: 'Click',
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -80,54 +75,6 @@ export const TransactionIsolationLevel = {
 export type TransactionIsolationLevel =
   (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
 
-export const MovieScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  description: 'description',
-  releaseYear: 'releaseYear',
-  rating: 'rating',
-  isAvailable: 'isAvailable',
-  genre: 'genre',
-  posterId: 'posterId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-} as const;
-
-export type MovieScalarFieldEnum =
-  (typeof MovieScalarFieldEnum)[keyof typeof MovieScalarFieldEnum];
-
-export const ReviewScalarFieldEnum = {
-  id: 'id',
-  text: 'text',
-  rating: 'rating',
-  movieId: 'movieId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-} as const;
-
-export type ReviewScalarFieldEnum =
-  (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum];
-
-export const ActorScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-} as const;
-
-export type ActorScalarFieldEnum =
-  (typeof ActorScalarFieldEnum)[keyof typeof ActorScalarFieldEnum];
-
-export const PosterScalarFieldEnum = {
-  id: 'id',
-  imageUrl: 'imageUrl',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-} as const;
-
-export type PosterScalarFieldEnum =
-  (typeof PosterScalarFieldEnum)[keyof typeof PosterScalarFieldEnum];
-
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -140,39 +87,29 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum =
   (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 
-export const UserQlScalarFieldEnum = {
+export const LinkScalarFieldEnum = {
   id: 'id',
-  email: 'email',
-  password: 'password',
-  name: 'name',
-  role: 'role',
+  shortCode: 'shortCode',
+  originalUrl: 'originalUrl',
+  userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
 } as const;
 
-export type UserQlScalarFieldEnum =
-  (typeof UserQlScalarFieldEnum)[keyof typeof UserQlScalarFieldEnum];
+export type LinkScalarFieldEnum =
+  (typeof LinkScalarFieldEnum)[keyof typeof LinkScalarFieldEnum];
 
-export const MessageScalarFieldEnum = {
+export const ClickScalarFieldEnum = {
   id: 'id',
-  text: 'text',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  linkId: 'linkId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
 } as const;
 
-export type MessageScalarFieldEnum =
-  (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum];
-
-export const ArtistScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  genre: 'genre',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-} as const;
-
-export type ArtistScalarFieldEnum =
-  (typeof ArtistScalarFieldEnum)[keyof typeof ArtistScalarFieldEnum];
+export type ClickScalarFieldEnum =
+  (typeof ClickScalarFieldEnum)[keyof typeof ClickScalarFieldEnum];
 
 export const SortOrder = {
   asc: 'asc',

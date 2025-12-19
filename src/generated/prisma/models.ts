@@ -7,12 +7,7 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Movie.js';
-export type * from './models/Review.js';
-export type * from './models/Actor.js';
-export type * from './models/Poster.js';
 export type * from './models/User.js';
-export type * from './models/UserQl.js';
-export type * from './models/Message.js';
-export type * from './models/Artist.js';
+export type * from './models/Link.js';
+export type * from './models/Click.js';
 export type * from './commonInputTypes.js';

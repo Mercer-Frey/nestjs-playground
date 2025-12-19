@@ -19,7 +19,7 @@ const config: runtime.GetPrismaClientConfig = {
   engineVersion: 'ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba',
   activeProvider: 'postgresql',
   inlineSchema:
-    'generator client {\n  provider     = "prisma-client"\n  output       = "../src/generated/prisma"\n  moduleFormat = "cjs"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel Movie {\n  id String @id @default(uuid(4))\n\n  title       String\n  description String?\n  releaseYear Int     @map("release_year")\n  rating      Float   @default(0.0)\n  isAvailable Boolean @default(false) @map("is_available")\n  genre       Genre   @default(DRAMA)\n\n  poster   Poster?  @relation(fields: [posterId], references: [id])\n  posterId String?  @unique @map("poster_id")\n  reviews  Review[] @relation("movie_reviews")\n  actors   Actor[]  @relation("movie_actors")\n\n  createdAt DateTime @default(now()) @map("created_at")\n  updatedAt DateTime @updatedAt() @map("updated_at")\n\n  @@index([releaseYear, title])\n  @@map("movies")\n}\n\nmodel Review {\n  id String @id @default(uuid(4))\n\n  text   String\n  rating Float  @default(0.0)\n\n  movie   Movie  @relation("movie_reviews", fields: [movieId], references: [id], onDelete: Cascade)\n  movieId String @map("movie_id")\n\n  createdAt DateTime @default(now()) @map("created_at")\n  updatedAt DateTime @updatedAt() @map("updated_at")\n\n  @@map("reviews")\n}\n\nmodel Actor {\n  id String @id @default(uuid(4))\n\n  name String\n\n  movies Movie[] @relation("movie_actors")\n\n  createdAt DateTime @default(now()) @map("created_at")\n  updatedAt DateTime @updatedAt() @map("updated_at")\n\n  @@map("actors")\n}\n\nmodel Poster {\n  id String @id @default(uuid(4))\n\n  imageUrl String\n\n  movie Movie?\n\n  createdAt DateTime @default(now()) @map("created_at")\n  updatedAt DateTime @updatedAt() @map("updated_at")\n\n  @@map("posters")\n}\n\nenum Genre {\n  ACTION\n  DRAMA\n  HORROR\n  COMEDY\n\n  @@map("enum_genres")\n}\n\nmodel User {\n  id String @id @default(uuid(4))\n\n  email    String @unique\n  password String\n  name     String\n\n  createdAt DateTime @default(now()) @map("created_at")\n  updatedAt DateTime @updatedAt() @map("updated_at")\n\n  @@map("users")\n}\n\nmodel UserQl {\n  id String @id @default(uuid(4))\n\n  email    String     @unique\n  password String\n  name     String\n  role     UserRoleQl @default(GUEST)\n\n  createdAt DateTime @default(now()) @map("created_at")\n  updatedAt DateTime @updatedAt() @map("updated_at")\n\n  @@map("users_ql")\n}\n\nenum UserRoleQl {\n  GUEST\n  ADMIN\n\n  @@map("enum_user_roles")\n}\n\nmodel Message {\n  id String @id @default(uuid(4))\n\n  text String\n\n  createdAt DateTime @default(now()) @map("created_at")\n  updatedAt DateTime @updatedAt() @map("updated_at")\n\n  @@map("messages")\n}\n\nmodel Artist {\n  id String @id @default(uuid(4))\n\n  name  String\n  genre ArtistGenre @default(ROCK)\n\n  createdAt DateTime @default(now()) @map("created_at")\n  updatedAt DateTime @updatedAt() @map("updated_at")\n\n  @@map("artists")\n}\n\nenum ArtistGenre {\n  ROCK\n  POP\n\n  @@map("enum_artist_genres")\n}\n',
+    'generator client {\n  provider     = "prisma-client"\n  output       = "../src/generated/prisma"\n  moduleFormat = "cjs"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel User {\n  id String @id @default(uuid(4))\n\n  email    String @unique\n  password String\n  name     String\n\n  links Link[]\n\n  createdAt DateTime @default(now()) @map("created_at")\n  updatedAt DateTime @updatedAt() @map("updated_at")\n\n  @@map("users")\n}\n\nmodel Link {\n  id String @id @default(uuid(4))\n\n  shortCode   String @unique @map("short_code")\n  originalUrl String @map("original_url")\n\n  clicks Click[]\n\n  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)\n  userId String? @map("user_id")\n\n  createdAt DateTime @default(now()) @map("created_at")\n  updatedAt DateTime @updatedAt() @map("updated_at")\n\n  @@map("links")\n}\n\nmodel Click {\n  id String @id @default(uuid(4))\n\n  ipAddress String @map("ip_address")\n  userAgent String @map("user_agent")\n\n  link   Link?   @relation(fields: [linkId], references: [id], onDelete: Cascade)\n  linkId String? @map("link_id")\n\n  createdAt DateTime @default(now()) @map("created_at")\n  updatedAt DateTime @updatedAt() @map("updated_at")\n\n  @@map("clicks")\n}\n',
   runtimeDataModel: {
     models: {},
     enums: {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
 };
 
 config.runtimeDataModel = JSON.parse(
-  '{"models":{"Movie":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"title","kind":"scalar","type":"String"},{"name":"description","kind":"scalar","type":"String"},{"name":"releaseYear","kind":"scalar","type":"Int","dbName":"release_year"},{"name":"rating","kind":"scalar","type":"Float"},{"name":"isAvailable","kind":"scalar","type":"Boolean","dbName":"is_available"},{"name":"genre","kind":"enum","type":"Genre"},{"name":"poster","kind":"object","type":"Poster","relationName":"MovieToPoster"},{"name":"posterId","kind":"scalar","type":"String","dbName":"poster_id"},{"name":"reviews","kind":"object","type":"Review","relationName":"movie_reviews"},{"name":"actors","kind":"object","type":"Actor","relationName":"movie_actors"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"},{"name":"updatedAt","kind":"scalar","type":"DateTime","dbName":"updated_at"}],"dbName":"movies"},"Review":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"text","kind":"scalar","type":"String"},{"name":"rating","kind":"scalar","type":"Float"},{"name":"movie","kind":"object","type":"Movie","relationName":"movie_reviews"},{"name":"movieId","kind":"scalar","type":"String","dbName":"movie_id"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"},{"name":"updatedAt","kind":"scalar","type":"DateTime","dbName":"updated_at"}],"dbName":"reviews"},"Actor":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"movies","kind":"object","type":"Movie","relationName":"movie_actors"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"},{"name":"updatedAt","kind":"scalar","type":"DateTime","dbName":"updated_at"}],"dbName":"actors"},"Poster":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"imageUrl","kind":"scalar","type":"String"},{"name":"movie","kind":"object","type":"Movie","relationName":"MovieToPoster"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"},{"name":"updatedAt","kind":"scalar","type":"DateTime","dbName":"updated_at"}],"dbName":"posters"},"User":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"email","kind":"scalar","type":"String"},{"name":"password","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"},{"name":"updatedAt","kind":"scalar","type":"DateTime","dbName":"updated_at"}],"dbName":"users"},"UserQl":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"email","kind":"scalar","type":"String"},{"name":"password","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"role","kind":"enum","type":"UserRoleQl"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"},{"name":"updatedAt","kind":"scalar","type":"DateTime","dbName":"updated_at"}],"dbName":"users_ql"},"Message":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"text","kind":"scalar","type":"String"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"},{"name":"updatedAt","kind":"scalar","type":"DateTime","dbName":"updated_at"}],"dbName":"messages"},"Artist":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"genre","kind":"enum","type":"ArtistGenre"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"},{"name":"updatedAt","kind":"scalar","type":"DateTime","dbName":"updated_at"}],"dbName":"artists"}},"enums":{},"types":{}}',
+  '{"models":{"User":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"email","kind":"scalar","type":"String"},{"name":"password","kind":"scalar","type":"String"},{"name":"name","kind":"scalar","type":"String"},{"name":"links","kind":"object","type":"Link","relationName":"LinkToUser"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"},{"name":"updatedAt","kind":"scalar","type":"DateTime","dbName":"updated_at"}],"dbName":"users"},"Link":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"shortCode","kind":"scalar","type":"String","dbName":"short_code"},{"name":"originalUrl","kind":"scalar","type":"String","dbName":"original_url"},{"name":"clicks","kind":"object","type":"Click","relationName":"ClickToLink"},{"name":"user","kind":"object","type":"User","relationName":"LinkToUser"},{"name":"userId","kind":"scalar","type":"String","dbName":"user_id"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"},{"name":"updatedAt","kind":"scalar","type":"DateTime","dbName":"updated_at"}],"dbName":"links"},"Click":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"ipAddress","kind":"scalar","type":"String","dbName":"ip_address"},{"name":"userAgent","kind":"scalar","type":"String","dbName":"user_agent"},{"name":"link","kind":"object","type":"Link","relationName":"ClickToLink"},{"name":"linkId","kind":"scalar","type":"String","dbName":"link_id"},{"name":"createdAt","kind":"scalar","type":"DateTime","dbName":"created_at"},{"name":"updatedAt","kind":"scalar","type":"DateTime","dbName":"updated_at"}],"dbName":"clicks"}},"enums":{},"types":{}}',
 );
 
 async function decodeBase64AsWasm(
@@ -65,8 +65,8 @@ export interface PrismaClientConstructor {
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Movies
-   * const movies = await prisma.movie.findMany()
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
    * ```
    *
    * Read more in our [docs](https://pris.ly/d/client).
@@ -94,8 +94,8 @@ export interface PrismaClientConstructor {
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Movies
- * const movies = await prisma.movie.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  *
  * Read more in our [docs](https://pris.ly/d/client).
@@ -215,46 +215,6 @@ export interface PrismaClient<
     },
   ): runtime.Types.Utils.JsPromise<R>;
   /**
-   * `prisma.movie`: Exposes CRUD operations for the **Movie** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Movies
-   * const movies = await prisma.movie.findMany()
-   * ```
-   */
-  get movie(): Prisma.MovieDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.review`: Exposes CRUD operations for the **Review** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Reviews
-   * const reviews = await prisma.review.findMany()
-   * ```
-   */
-  get review(): Prisma.ReviewDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.actor`: Exposes CRUD operations for the **Actor** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Actors
-   * const actors = await prisma.actor.findMany()
-   * ```
-   */
-  get actor(): Prisma.ActorDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.poster`: Exposes CRUD operations for the **Poster** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Posters
-   * const posters = await prisma.poster.findMany()
-   * ```
-   */
-  get poster(): Prisma.PosterDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
    * Example usage:
    * ```ts
@@ -265,34 +225,24 @@ export interface PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.userQl`: Exposes CRUD operations for the **UserQl** model.
+   * `prisma.link`: Exposes CRUD operations for the **Link** model.
    * Example usage:
    * ```ts
-   * // Fetch zero or more UserQls
-   * const userQls = await prisma.userQl.findMany()
+   * // Fetch zero or more Links
+   * const links = await prisma.link.findMany()
    * ```
    */
-  get userQl(): Prisma.UserQlDelegate<ExtArgs, { omit: OmitOpts }>;
+  get link(): Prisma.LinkDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.message`: Exposes CRUD operations for the **Message** model.
+   * `prisma.click`: Exposes CRUD operations for the **Click** model.
    * Example usage:
    * ```ts
-   * // Fetch zero or more Messages
-   * const messages = await prisma.message.findMany()
+   * // Fetch zero or more Clicks
+   * const clicks = await prisma.click.findMany()
    * ```
    */
-  get message(): Prisma.MessageDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.artist`: Exposes CRUD operations for the **Artist** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Artists
-   * const artists = await prisma.artist.findMany()
-   * ```
-   */
-  get artist(): Prisma.ArtistDelegate<ExtArgs, { omit: OmitOpts }>;
+  get click(): Prisma.ClickDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

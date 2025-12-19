@@ -22,8 +22,8 @@ export * from './enums.js';
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Movies
- * const movies = await prisma.movie.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  *
  * Read more in our [docs](https://pris.ly/d/client).
@@ -39,42 +39,17 @@ export type PrismaClient<
 export { Prisma };
 
 /**
- * Model Movie
- *
- */
-export type Movie = Prisma.MovieModel;
-/**
- * Model Review
- *
- */
-export type Review = Prisma.ReviewModel;
-/**
- * Model Actor
- *
- */
-export type Actor = Prisma.ActorModel;
-/**
- * Model Poster
- *
- */
-export type Poster = Prisma.PosterModel;
-/**
  * Model User
  *
  */
 export type User = Prisma.UserModel;
 /**
- * Model UserQl
+ * Model Link
  *
  */
-export type UserQl = Prisma.UserQlModel;
+export type Link = Prisma.LinkModel;
 /**
- * Model Message
+ * Model Click
  *
  */
-export type Message = Prisma.MessageModel;
-/**
- * Model Artist
- *
- */
-export type Artist = Prisma.ArtistModel;
+export type Click = Prisma.ClickModel;
