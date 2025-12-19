@@ -31,6 +31,13 @@ async function bootstrap() {
   });
 
   SwaggerConfig(app);
+
+  // app.enableVersioning({
+  //   type: VersioningType.HEADER,
+  //   header: 'X-API-Version',
+  //   defaultVersion: '1',
+  // });
+
   await app.listen(process.env.PORT ?? 3000);
 }
 // eslint-disable-next-line
