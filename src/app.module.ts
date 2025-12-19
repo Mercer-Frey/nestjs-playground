@@ -18,6 +18,9 @@ import { AppService } from '@root/app.service';
 import { AppController } from '@root/app.controller';
 import { SpotifyModule } from './spotify/spotify.module';
 import { getSpotifyConfig } from '@root/config/spotify.config';
+import { FileModule } from './file/file.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   controllers: [AppController],
@@ -69,6 +72,12 @@ import { getSpotifyConfig } from '@root/config/spotify.config';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: getSpotifyConfig,
+    }),
+
+    FileModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(process.cwd(), 'uploads'),
+      serveRoot: '/uploads',
     }),
   ],
 })
