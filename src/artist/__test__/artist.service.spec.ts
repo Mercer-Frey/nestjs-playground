@@ -1,4 +1,4 @@
-import { ArtistService } from './artist.service';
+import { ArtistService } from '../artist.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { v4 as uuidv4 } from 'uuid';
 import { ArtistGenre } from '@root/generated/prisma/enums';

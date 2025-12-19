@@ -14,8 +14,12 @@ import { AuthQlModule } from './auth-ql/auth-ql.module';
 import { UserQlModule } from './user-ql/user-ql.module';
 import { ChatModule } from './chat/chat.module';
 import { ArtistModule } from './artist/artist.module';
+import { AppService } from '@root/app.service';
+import { AppController } from '@root/app.controller';
 
 @Module({
+  controllers: [AppController],
+  providers: [AppService],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,

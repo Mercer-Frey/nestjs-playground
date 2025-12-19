@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ArtistService } from './artist.service';
 import { ArtistDto } from '@root/artist/dto/create-artist.dto';
 
-@Controller('artist')
+@Controller('artists')
 export class ArtistController {
   constructor(private readonly artistService: ArtistService) {}
 
@@ -11,7 +11,7 @@ export class ArtistController {
     return this.artistService.create(dto);
   }
 
-  @Get()
+  @Get('all')
   findAll() {
     return this.artistService.findAll();
   }

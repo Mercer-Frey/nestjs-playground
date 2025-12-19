@@ -20,6 +20,7 @@ const config: Config = {
   // 🔥 ВОТ ЭТО ЧИНИТ АЛИАСЫ
   moduleNameMapper: {
     '^@root/(.*)$': '<rootDir>/src/$1',
+    '^@shared/(.*)$': '<rootDir>/src/shared/$1',
     '^uuid$': '<rootDir>/test/mocks/uuid.ts',
   },
 };
