@@ -4,9 +4,12 @@ import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { SwaggerConfig } from '@root/config/swagger.config';
 import cookieParser from 'cookie-parser';
 import { ConfigService } from '@nestjs/config';
+import { CustomLogger } from '@root/common/logger/logger.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true,
+  });
   const config = app.get(ConfigService);
   app.use(cookieParser());
 
@@ -37,6 +40,8 @@ async function bootstrap() {
   //   header: 'X-API-Version',
   //   defaultVersion: '1',
   // });
+
+  app.useLogger(new CustomLogger());
 
   await app.listen(process.env.PORT ?? 3000);
 }
