@@ -16,6 +16,7 @@ import { ChatModule } from './chat/chat.module';
 import { ArtistModule } from './artist/artist.module';
 import { AppService } from '@root/app.service';
 import { AppController } from '@root/app.controller';
+import { SpotifyModule } from './spotify/spotify.module';
 
 @Module({
   controllers: [AppController],
@@ -57,6 +58,7 @@ import { AppController } from '@root/app.controller';
     UserQlModule,
     ChatModule,
     ArtistModule,
+    SpotifyModule,
   ],
 })
 export class AppModule implements NestModule {

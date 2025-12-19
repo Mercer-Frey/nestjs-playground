@@ -1,6 +1,6 @@
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { INestApplication } from '@nestjs/common';
-import { AuthModule } from '@root/auth/auth.module';
+import { AppModule } from '@root/app.module';
 
 export function SwaggerConfig(app: INestApplication) {
   const config = new DocumentBuilder()
@@ -22,7 +22,7 @@ export function SwaggerConfig(app: INestApplication) {
 
   const documentFactory = () =>
     SwaggerModule.createDocument(app, config, {
-      include: [AuthModule],
+      include: [AppModule],
       // deepScanRoutes: true,
       // extraModels: [MovieDto],
       operationIdFactory: (controllerKey, methodKey) =>
