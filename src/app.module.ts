@@ -17,6 +17,7 @@ import { ArtistModule } from './artist/artist.module';
 import { AppService } from '@root/app.service';
 import { AppController } from '@root/app.controller';
 import { SpotifyModule } from './spotify/spotify.module';
+import { getSpotifyConfig } from '@root/config/spotify.config';
 
 @Module({
   controllers: [AppController],
@@ -58,7 +59,17 @@ import { SpotifyModule } from './spotify/spotify.module';
     UserQlModule,
     ChatModule,
     ArtistModule,
-    SpotifyModule,
+
+    // SpotifyModule.forRoot({
+    //   clientId: '9b5a60da4249496cad409f05b706e953',
+    //   clientSecret: '76e171034ff54f2a9a8ef3bfbb17197f',
+    // }),
+
+    SpotifyModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: getSpotifyConfig,
+    }),
   ],
 })
 export class AppModule implements NestModule {
