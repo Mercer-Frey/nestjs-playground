@@ -76,7 +76,6 @@ Prisma.AnyNull = AnyNull;
 
 Prisma.NullTypes = NullTypes;
 
-
 /**
  * Enums
  */

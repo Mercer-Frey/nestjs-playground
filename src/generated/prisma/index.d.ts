@@ -361,7 +361,6 @@ export namespace Prisma {
 
   export type DecimalJsLike = runtime.DecimalJsLike;
 
-
   /**
    * Prisma Client JS version: 7.1.0
    * Query Engine version: ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba
@@ -372,7 +371,6 @@ export namespace Prisma {
   };
 
   export const prismaVersion: PrismaVersion;
-
 
   /**
    * Types of the values used to represent different kinds of `null` values when working with JSON fields.
