@@ -21,6 +21,7 @@ import { getSpotifyConfig } from '@root/config/spotify.config';
 import { FileModule } from './file/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { JobsModule } from './jobs/jobs.module';
 
 @Module({
   controllers: [AppController],
@@ -79,6 +80,7 @@ import { join } from 'path';
       rootPath: join(process.cwd(), 'uploads'),
       serveRoot: '/uploads',
     }),
+    JobsModule,
   ],
 })
 export class AppModule implements NestModule {
